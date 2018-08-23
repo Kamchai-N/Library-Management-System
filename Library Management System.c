@@ -13,6 +13,12 @@ void returnfunc(void);
 void searchbooks(void);
 void searchbookbyid(void);
 void searchbookbyname(void);
+void line_mainmenu(void);
+void line_addbooks(void);
+void line_getdata(void);
+void line_deletebooks(void);
+void line_searchbooks(void);
+void line_searchbookbyid(void);
 
 struct books{
 	int id;
@@ -43,21 +49,22 @@ void gotoxy (int x, int y){
 }
 void mainmenu(){
 	system("cls");
-	gotoxy(20,3);
+	line_mainmenu();
+	gotoxy(42,3);
 	printf("Library Management System");
-	gotoxy(5,5);
+	gotoxy(25,5);
 	printf("----------------------- MAIN MENU ----------------------------");
-	gotoxy(8,6);
+	gotoxy(30,7);
 	printf("1. Add Books");
-	gotoxy(8,8);
+	gotoxy(30,9);
 	printf("2. Delete books");
-	gotoxy(8,10);
+	gotoxy(30,11);
 	printf("3. Search Books");
-	gotoxy(8,12);
+	gotoxy(30,13);
 	printf("4. View Book list");
-	gotoxy(8,14);
+	gotoxy(30,15);
 	printf("5. Close Application");
-	gotoxy(8,16);
+	gotoxy(30,18);
 	printf("Enter your choice: ");
 	switch(getch()){
 		case '1':
@@ -82,34 +89,45 @@ void mainmenu(){
 			printf("Exiting in 3 second...........");
 			Sleep(3000);
 			exit(0);
+			break;
 		}
-		break;		
+		default :{
+			gotoxy(50,22);
+			printf("Warning");
+			Sleep(3000);
+			mainmenu();
+			break;
+		}
+				
 	}
 }
 void addbooks(){
 	system("cls");
-	gotoxy(20,3);
+	line_addbooks();
+	gotoxy(42,3);
 	printf("Library Management System");
-	gotoxy(5,5);
-	printf("----------------------- SELECT CATEGOIES ----------------------------");
-	gotoxy(8,6);
+	gotoxy(25,5);
+	printf("--------------------- SELECT CATEGOIES ----------------------");
+	gotoxy(30,7);
 	printf("1. Computer");
-	gotoxy(8,8);
+	gotoxy(30,9);
 	printf("2. Electronics");
-	gotoxy(8,10);
+	gotoxy(30,11);
 	printf("3. Electrical");
-	gotoxy(8,12);
+	gotoxy(30,13);
 	printf("4. Civil");
-	gotoxy(8,14);
+	gotoxy(30,15);
 	printf("5. Mechanical");
-	gotoxy(8,14);
+	gotoxy(30,17);
 	printf("6. ETC.");
-	gotoxy(8,16);
+	gotoxy(30,19);
 	printf("7. Back to main menu");
-	gotoxy(8,18);
+	gotoxy(30,22);
 	printf("Enter your choice: ");
 	scanf("%d",&s);
 	if(s == 7){
+		mainmenu();
+	}else if(s>7){
 		mainmenu();
 	}
 	system("cls");
@@ -120,9 +138,10 @@ void addbooks(){
 		fseek(fp,0,SEEK_END);
 		fwrite(&a,sizeof(a),1,fp);
 		fclose(fp);
-		gotoxy(21,14);
+		gotoxy(25,22);printf("--------------------------------------------------------------"); // Top
+		gotoxy(40,24);
 		printf("The record is sucessfully saved");
-		gotoxy(21,15);
+		gotoxy(40,25);
 		printf("Save any more?(Y / N):");
 		if(getch()=='n')
 			mainmenu();
@@ -133,41 +152,39 @@ void addbooks(){
 }
 int getdata(){
 	int t;
-	gotoxy(20,3);
-	printf("Enter the Information Below");
-	gotoxy(21,5);
+	line_getdata();
+	gotoxy(42,3);
+	printf("Library Management System");
+	gotoxy(25,5);
+	printf("------------------------- Add Books --------------------------");
+	gotoxy(30,8);
 	printf("Category:");
-	gotoxy(31,5);
+	gotoxy(40,8);
 	printf("%s",catagories[s-1]);
-	gotoxy(21,6);
+	gotoxy(30,10);
 	printf("Book ID:\t");
-	gotoxy(30,6);
+	gotoxy(40,10);
 	scanf("%d",&t);
 //	printf("%d",t);
 	if(checkid(t) == 0)
 	{
-		gotoxy(21,13);
+		gotoxy(40,13);
 		printf("\aThe book id already exists\a");
 		getch();
 		mainmenu();
 		return 0;
 	}
 	a.id=t;
-	gotoxy(21,7);
-	printf("Book Name:");gotoxy(33,7);
-	scanf("%s",a.name);
-	gotoxy(21,8);
-	printf("Author:");gotoxy(30,8);
-	scanf("%s",a.Author);
-	gotoxy(21,9);
-	printf("Quantity:");gotoxy(31,9);
-	scanf("%d",&a.quantity);
-	gotoxy(21,10);
-	printf("Price:");gotoxy(28,10);
-	scanf("%f",&a.Price);
-	gotoxy(21,11);
-	printf("Rack No:");gotoxy(30,11);
-	scanf("%s",&a.rackno);
+	gotoxy(30,12);printf("Book Name:");
+	gotoxy(40,12);scanf("%s",a.name);
+	gotoxy(30,14);printf("Author:");
+	gotoxy(40,14);scanf("%s",a.Author);
+	gotoxy(30,16);printf("Quantity:");
+	gotoxy(40,16);scanf("%d",&a.quantity);
+	gotoxy(30,18);printf("Price:");
+	gotoxy(40,18);scanf("%f",&a.Price);
+	gotoxy(30,20);printf("Rack No:");
+	gotoxy(40,20);scanf("%s",&a.rackno);
 	return 1;
 }
 int checkid(int t){
@@ -181,17 +198,22 @@ void deletebooks(){
     system("cls"); 
     char another = 'y';
     int d,findBook = 0;
-    while(another = 'y'){  
-        gotoxy(25,7);printf("********BOOK DELETE********");
-        gotoxy(10,9);printf("Enter the Book ID to  delete:"); scanf("%d",&d);
+    while(another = 'y'){
+		line_deletebooks();
+		gotoxy(42,3);
+		printf("Library Management System");
+		gotoxy(25,5);
+		printf("------------------------- BOOK DELETE ------------------------");
+        gotoxy(28,7);printf("Enter the Book ID to  delete:"); scanf("%d",&d);
         fp = fopen("data.txt","rb+");
         while(fread(&a,sizeof(a),1,fp)==1){
             if(a.id==d){
-                gotoxy(10,11);printf("The book record is available");
-                gotoxy(10,13);printf("Book name is %s",a.name);
-                gotoxy(10,14);printf("Rack No. is %d",a.rackno);
+                gotoxy(28,11);printf("The book record is available");
+                gotoxy(28,13);printf("Book name is %s",a.name);
+                gotoxy(28,14);printf("Rack No. is %d",a.rackno);
+                gotoxy(25,16);printf("--------------------------------------------------------------");
                 findBook = 1;
-                gotoxy(10,16);printf("Do you want to delete it?(Y/N):");
+                gotoxy(28,18);printf("Do you want to delete it?(Y/N):");
                 if(getch()=='y'){
                     ft=fopen("test.txt","wb");  
                     rewind(fp);
@@ -204,15 +226,15 @@ void deletebooks(){
                     fclose(ft);
                     remove("data.txt");
                     rename("test.txt","data.txt"); 
-                    gotoxy(10,17);printf("The record is sucessfully deleted");
+                    gotoxy(28,19);printf("The record is sucessfully deleted");
                 }
             }
         }
         if(findBook == 0){
-            gotoxy(10,11);printf("No record is found");
+            gotoxy(28,11);printf("No record is found");
         }
 
-        gotoxy(10,18);printf("Delete another record?(Y/N)");
+        gotoxy(28,20);printf("Delete another record?(Y/N)");
         if(getch()=='y'){
             deletebooks();
         }else{
@@ -263,14 +285,18 @@ void returnfunc(){
 }
 void searchbooks(){
 	system("cls");
-	printf("*****************************Search Books*********************************");
-	gotoxy(5,4);
+	line_searchbooks();
+	gotoxy(42,3);
+	printf("Library Management System");
+	gotoxy(25,5);
+	printf("------------------------- BOOK SEARCH ------------------------");
+	gotoxy(35,8);
 	printf(" 1. Search By ID");
-	gotoxy(5,6);
+	gotoxy(35,10);
 	printf(" 2. Search By Name");
-	gotoxy(5,8);
-	printf(" * Back to Main Menu");
-	gotoxy(5,10);
+	gotoxy(35,12);
+	printf(" 3. Back to Main Menu");
+	gotoxy(35,14);
 	printf("Enter Your Choice : ");
 	fp=fopen("data.txt","rb+"); 
 	rewind(fp);
@@ -283,7 +309,7 @@ void searchbooks(){
 			searchbookbyname();
 			break;
 		}
-		case '*':{
+		case '3':{
 			mainmenu();
 			break;
 		}
@@ -295,39 +321,44 @@ void searchbooks(){
 }
 void searchbookbyid(){
 	system("cls");
-	gotoxy(25,4);
+	line_searchbookbyid();
+	gotoxy(42,3);
+	printf("Library Management System");
+	gotoxy(25,5);
+	printf("------------------------- BOOK SEARCH ------------------------");
+	gotoxy(30,6);
 	printf("****Search Books By Id****");
-	gotoxy(20,5);
+	gotoxy(30,8);
 	printf("Enter the book id:");
 	scanf("%d",&d);
-	gotoxy(20,7);
+	gotoxy(35,9);
 	printf("Searching........");
 	while(fread(&a,sizeof(a),1,fp)==1){
         if(a.id==d){
         	Sleep(2);
-        	gotoxy(20,7);
+        	gotoxy(35,11);
 			printf("The Book is available");
-			gotoxy(20,9);
+			gotoxy(35,12);
 			printf("ID:%d",a.id);printf("\n");
-			gotoxy(20,10);
+			gotoxy(35,13);
 			printf("Name:%s",a.name);printf("\n");
-			gotoxy(20,11);
+			gotoxy(35,14);
 			printf("Author:%s ",a.Author);printf("\n");
-			gotoxy(20,12);
+			gotoxy(35,15);
 			printf("Qantity:%d ",a.quantity);printf("\n");
-			gotoxy(20,13);
-			printf("Price:Rs.%.2f",a.Price);printf("\n");
-			gotoxy(20,14);
+			gotoxy(35,16);
+			printf("Price:%.2f",a.Price);printf("\n");
+			gotoxy(35,17);
 			printf("Rack No:%s ",a.rackno);printf("\n");
-			gotoxy(20,15);
+			gotoxy(35,18);
 			findbook='f';
 		}
 	}
-	if(findbook!='t'){
+	if(findbook!='f'){
 		gotoxy(22,9);
 		printf("\aNo Record Found");
 	}
-	gotoxy(20,17);
+	gotoxy(35,20);
 	printf("Try another search?(Y/N): ");
 	if(getch()=='y'){
 		searchbooks();
@@ -375,4 +406,136 @@ void searchbookbyname(){
 	}else{
 		mainmenu();
 	}	
+}
+void line_mainmenu(){
+	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
+	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
+	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
+	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
+	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
+	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
+	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
+	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
+	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
+	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
+	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
+	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
+	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
+	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
+	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
+	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
+	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
+	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
+	gotoxy(25,17);printf("--------------------------------------------------------------");
+	gotoxy(25,20);printf("--------------------------------------------------------------");
+	gotoxy(25,1);printf("--------------------------------------------------------------");
+}
+void line_addbooks(){
+	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
+	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
+	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
+	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
+	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
+	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
+	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
+	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
+	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
+	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
+	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
+	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
+	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
+	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
+	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
+	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
+	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
+	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
+	gotoxy(25,20);printf("|");gotoxy(86,20);printf("|");
+	gotoxy(25,21);printf("|");gotoxy(86,21);printf("|");
+	gotoxy(25,22);printf("|");gotoxy(86,22);printf("|");
+	gotoxy(25,23);printf("|");gotoxy(86,23);printf("|");
+	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
+	gotoxy(25,21);printf("--------------------------------------------------------------"); // Center
+	gotoxy(25,24);printf("--------------------------------------------------------------"); // End
+}
+void line_getdata(){
+	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
+	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
+	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
+	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
+	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
+	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
+	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
+	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
+	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
+	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
+	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
+	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
+	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
+	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
+	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
+	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
+	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
+	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
+	gotoxy(25,20);printf("|");gotoxy(86,20);printf("|");
+	gotoxy(25,21);printf("|");gotoxy(86,21);printf("|");
+	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
+}
+void line_deletebooks(){
+	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
+	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
+	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
+	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
+	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
+	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
+	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
+	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
+	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
+	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
+	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
+	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
+	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
+	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
+	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
+}
+void line_searchbooks(){
+	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
+	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
+	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
+	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
+	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
+	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
+	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
+	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
+	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
+	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
+	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
+	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
+	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
+	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
+	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
+	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
+	gotoxy(25,17);printf("--------------------------------------------------------------"); // Top
+}
+void line_searchbookbyid(){
+	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
+	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
+	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
+	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
+	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
+	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
+	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
+	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
+	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
+	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
+	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
+	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
+	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
+	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
+	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
+	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
+	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
+	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
+	gotoxy(25,20);printf("|");gotoxy(86,20);printf("|");
+	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
+	gotoxy(25,21);printf("--------------------------------------------------------------"); // Top
 }
