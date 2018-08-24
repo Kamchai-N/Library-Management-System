@@ -18,7 +18,7 @@ void line_addbooks(void);
 void line_getdata(void);
 void line_deletebooks(void);
 void line_searchbooks(void);
-void line_searchbookbyid(void);
+void line_searchbookby(void);
 
 struct books{
 	int id;
@@ -321,7 +321,7 @@ void searchbooks(){
 }
 void searchbookbyid(){
 	system("cls");
-	line_searchbookbyid();
+	line_searchbookby();
 	gotoxy(42,3);
 	printf("Library Management System");
 	gotoxy(25,5);
@@ -369,29 +369,36 @@ void searchbookbyid(){
 void searchbookbyname(){
 	char s[15];
 	system("cls");
-	gotoxy(25,4);
+	line_searchbookby();
+	gotoxy(42,3);
+	printf("Library Management System");
+	gotoxy(25,5);
+	printf("------------------------- BOOK SEARCH ------------------------");
+	gotoxy(30,6);
 	printf("****Search Books By Name****");
-	gotoxy(20,5);
+	gotoxy(30,8);
 	printf("Enter the book Name:");
 	scanf("%s",s);
 	int d = 0;
+	gotoxy(35,9);
+	printf("Searching........");
 	while(fread(&a,sizeof(a),1,fp)==1){
         if(strcmp(a.name,(s))==0){
-        	gotoxy(20,7);
+        	gotoxy(35,11);
 			printf("The Book is available");
-			gotoxy(20,9);
+			gotoxy(35,12);
 			printf("ID:%d",a.id);printf("\n");
-			gotoxy(20,10);
+			gotoxy(35,13);
 			printf("Name:%s",a.name);printf("\n");
-			gotoxy(20,11);
+			gotoxy(35,14);
 			printf("Author:%s ",a.Author);printf("\n");
-			gotoxy(20,12);
+			gotoxy(35,15);
 			printf("Qantity:%d ",a.quantity);printf("\n");
-			gotoxy(20,13);
+			gotoxy(35,16);
 			printf("Price:Rs.%.2f",a.Price);printf("\n");
-			gotoxy(20,14);
+			gotoxy(35,17);
 			printf("Rack No:%s ",a.rackno);printf("\n");
-			gotoxy(20,15);
+			gotoxy(35,18);
 			d++;
 		}
 	}
@@ -399,7 +406,7 @@ void searchbookbyname(){
 		gotoxy(22,9);
 		printf("\aNo Record Found");
 	}
-	gotoxy(20,17);
+	gotoxy(35,20);
 	printf("Try another search?(Y/N)");
 	if(getch()=='y'){
 		searchbooks();
@@ -516,7 +523,7 @@ void line_searchbooks(){
 	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
 	gotoxy(25,17);printf("--------------------------------------------------------------"); // Top
 }
-void line_searchbookbyid(){
+void line_searchbookby(){
 	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
 	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
 	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
