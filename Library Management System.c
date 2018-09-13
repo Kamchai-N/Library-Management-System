@@ -13,12 +13,7 @@ void returnfunc(void);
 void searchbooks(void);
 void searchbookbyid(void);
 void searchbookbyname(void);
-//void line_mainmenu(void);
-//void line_addbooks(void);
-//void line_getdata(void);
-//void line_deletebooks(void);
-//void line_searchbooks(void);
-//void line_searchbookby(void);
+
 
 struct books{
 	int id;
@@ -209,7 +204,7 @@ void deletebooks(){
             if(a.id==d){
                 gotoxy(28,11);printf("The book record is available");
                 gotoxy(28,13);printf("Book name is %s",a.name);
-                gotoxy(28,14);printf("Rack No. is %d",a.rackno);
+                gotoxy(28,14);printf("Rack No. is %s",a.rackno);
                 gotoxy(25,16);printf("--------------------------------------------------------------");
                 findBook = 1;
                 gotoxy(28,18);printf("Do you want to delete it?(Y/N):");
@@ -413,135 +408,4 @@ void searchbookbyname(){
 		mainmenu();
 	}	
 }
-//void line_mainmenu(){
-//	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
-//	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
-//	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
-//	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
-//	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
-//	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
-//	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
-//	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
-//	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
-//	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
-//	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
-//	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
-//	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
-//	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
-//	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
-//	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
-//	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
-//	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
-//	gotoxy(25,17);printf("--------------------------------------------------------------");
-//	gotoxy(25,20);printf("--------------------------------------------------------------");
-//	gotoxy(25,1);printf("--------------------------------------------------------------");
-//}
-//void line_addbooks(){
-//	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
-//	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
-//	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
-//	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
-//	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
-//	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
-//	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
-//	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
-//	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
-//	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
-//	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
-//	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
-//	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
-//	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
-//	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
-//	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
-//	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
-//	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
-//	gotoxy(25,20);printf("|");gotoxy(86,20);printf("|");
-//	gotoxy(25,21);printf("|");gotoxy(86,21);printf("|");
-//	gotoxy(25,22);printf("|");gotoxy(86,22);printf("|");
-//	gotoxy(25,23);printf("|");gotoxy(86,23);printf("|");
-//	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
-//	gotoxy(25,21);printf("--------------------------------------------------------------"); // Center
-//	gotoxy(25,24);printf("--------------------------------------------------------------"); // End
-//}
-//void line_getdata(){
-//	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
-//	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
-//	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
-//	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
-//	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
-//	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
-//	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
-//	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
-//	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
-//	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
-//	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
-//	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
-//	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
-//	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
-//	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
-//	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
-//	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
-//	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
-//	gotoxy(25,20);printf("|");gotoxy(86,20);printf("|");
-//	gotoxy(25,21);printf("|");gotoxy(86,21);printf("|");
-//	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
-//}
-//void line_deletebooks(){
-//	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
-//	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
-//	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
-//	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
-//	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
-//	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
-//	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
-//	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
-//	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
-//	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
-//	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
-//	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
-//	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
-//	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
-//	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
-//}
-//void line_searchbooks(){
-//	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
-//	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
-//	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
-//	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
-//	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
-//	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
-//	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
-//	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
-//	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
-//	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
-//	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
-//	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
-//	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
-//	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
-//	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
-//	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
-//	gotoxy(25,17);printf("--------------------------------------------------------------"); // Top
-//}
-//void line_searchbookby(){
-//	gotoxy(25,2);printf("|");gotoxy(86,2);printf("|");
-//	gotoxy(25,3);printf("|");gotoxy(86,3);printf("|");
-//	gotoxy(25,4);printf("|");gotoxy(86,4);printf("|");
-//	gotoxy(25,5);printf("|");gotoxy(86,5);printf("|");
-//	gotoxy(25,6);printf("|");gotoxy(86,6);printf("|");
-//	gotoxy(25,7);printf("|");gotoxy(86,7);printf("|");
-//	gotoxy(25,8);printf("|");gotoxy(86,8);printf("|");
-//	gotoxy(25,9);printf("|");gotoxy(86,9);printf("|");
-//	gotoxy(25,10);printf("|");gotoxy(86,10);printf("|");
-//	gotoxy(25,11);printf("|");gotoxy(86,11);printf("|");
-//	gotoxy(25,12);printf("|");gotoxy(86,12);printf("|");
-//	gotoxy(25,13);printf("|");gotoxy(86,13);printf("|");
-//	gotoxy(25,14);printf("|");gotoxy(86,14);printf("|");
-//	gotoxy(25,15);printf("|");gotoxy(86,15);printf("|");
-//	gotoxy(25,16);printf("|");gotoxy(86,16);printf("|");
-//	gotoxy(25,17);printf("|");gotoxy(86,17);printf("|");
-//	gotoxy(25,18);printf("|");gotoxy(86,18);printf("|");
-//	gotoxy(25,19);printf("|");gotoxy(86,19);printf("|");
-//	gotoxy(25,20);printf("|");gotoxy(86,20);printf("|");
-//	gotoxy(25,1);printf("--------------------------------------------------------------"); // Top
-//	gotoxy(25,21);printf("--------------------------------------------------------------"); // Top
-//}
+
